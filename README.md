@@ -2,6 +2,8 @@
 
 This is the data for the [Christmas tree protein I made](https://michelanglo.sgc.ox.ac.uk/data/83a2e29a-1e5e-41be-9fc9-9073c43dc482).
 
+! [final.png](final.png)
+
 The tree was made with Rosetta and PyMol.
 
 ## Prototree
@@ -193,3 +195,4 @@ In Michelanglo, I uploaded the PDB and using the API I changed the `proteinJSON`
 	}
 
 
+Note that NGL seems to ignore `LINK` lines so the FITC-cys seem unliked. But actually aren't.
