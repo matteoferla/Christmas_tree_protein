@@ -1,0 +1,28 @@
+# this is just copper rebranded
+# I think right now that Mini has to have at least three atoms per residue,
+# hence the virtual atoms.
+NAME AU
+IO_STRING  AU X
+TYPE LIGAND
+PROPERTIES METAL
+AA UNK
+ROTAMERS BASIC
+ATOM AU   Cu2p  Cu2p 2.00
+ATOM  V1  VIRT  VIRT 0.00
+ATOM  V2  VIRT  VIRT 0.00
+ATOM  V3  VIRT  VIRT 0.00
+ATOM  V4  VIRT  VIRT 0.00
+BOND AU    V1
+BOND AU    V2
+BOND AU    V3
+BOND AU    V4
+NBR_ATOM AU
+NBR_RADIUS 5.0
+NET_FORMAL_CHARGE +2
+# tetrahedral geometry with 2.2 distance from center to vertex
+# chirality is defined so that viewing from V1 to CU, V2-V3-V4 are in clockwise direction.
+ICOOR_INTERNAL   AU      0.000000    0.000000    0.000000  AU     V1    V2
+ICOOR_INTERNAL    V1     0.000000    0.000000    2.200000  AU     V1    V2
+ICOOR_INTERNAL    V2     0.000000   70.500000    2.200000  AU     V1    V2
+ICOOR_INTERNAL    V3   120.000000   70.500000    2.200000  AU     V1    V2
+ICOOR_INTERNAL    V4  -120.000000   70.500000    2.200000  AU     V1    V2
