@@ -1,6 +1,6 @@
 # Christmas_tree_protein
 
-This is the data for the [Christmas tree protein I made](https://michelanglo.sgc.ox.ac.uk/data/83a2e29a-1e5e-41be-9fc9-9073c43dc482).
+This is the data for the [FITC-labelled blinking and spinning Christmas tree protein I made in Michelanglo](https://michelanglo.sgc.ox.ac.uk/r/christmas).
 
 ![final.png](final.png)
 
