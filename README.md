@@ -11,40 +11,40 @@ The tree was made with Rosetta and PyMol.
 In a Jupyter notebook, I made the five helix edges, using a script I previous made ([protein_fuser](https://github.com/matteoferla/protein_fuser), which was a step that aligns the protein on the x-axis (the script fuses different structures of a multidomain protein togheter along the x-axis).
 
 
-	from protein_fuser import Workshop, Model, pymol
+	from protein_fuser import Model
+        import pymol2
 	import math
-	w = Workshop()
-	pymol.cmd.delete('all')
+
+	with pymol2.PyMOL() as pymol:
 	
-	# make a helix
-	pymol.cmd.fab('A'*16, 'leaf', chain='A', ss=1) # ss=1 is a helix
-	pymol.cmd.alter('name C01','name="CA"')
-	pymol.cmd.sort()
-	# align to the x-axis.
-	m = Model('custom', 'A', 'leaf', 1, 16, start=1, end=16, seq='A'*16, length=16, workshop=w)
-	m.angle_fix()
+	    # make a helix
+	    pymol.cmd.fab('A'*16, 'leaf', chain='A', ss=1) # ss=1 is a helix
+	    pymol.cmd.alter('name C01','name="CA"')
+	    pymol.cmd.sort()
+	    # align to the x-axis.
+	    m = Model('custom', 'A', 'leaf', 1, 16, start=1, end=16, seq='A'*16, length=16, workshop=w)
+	    m.angle_fix()
 
+	    # the helix needs to be shifted downwards a bit though.
+	    ori = [0, 0, 0]
+	    pymol.cmd.translate([15, 0, 0], 'leaf', camera = 0)
 
-	# the helix needs to be shifted downwards a bit though.
-	ori = [0, 0, 0]
-	pymol.cmd.translate([15, 0, 0], 'leaf', camera = 0)
-
-	#copy 5 times but alternate the direction and rotate outwards by 20&deg;
-	for i in range(5):
-	    pymol.cmd.create(f'leaf{i}', 'leaf')
-	    if i % 2 == 1:
-		# N/C terminal flip
-		pymol.cmd.rotate('z', 180, f'leaf{i}', origin=ori, camera=0)
-		x, y, z = pymol.cmd.get_coords(f'/leaf{i}//A/16/C')[0]
-		pymol.cmd.translate([-x + 15, -y, z], f'leaf{i}', camera=0)
-	    pymol.cmd.rotate('z', 20 * math.sin(i * 2 * math.pi/5), f'leaf{i}', origin=ori)
-	    pymol.cmd.rotate('y', 20 * math.cos(i * 2 * math.pi/5), f'leaf{i}', origin=ori)
-	    pymol.cmd.alter(f'leaf{i}', f'resi=str(int(resi)+{i*16})')
-	pymol.cmd.sort()
-	pymol.cmd.delete('leaf')
-	pymol.cmd.create('combo',' or '.join([f'leaf{i}' for i in range(5)]))
-	pymol.cmd.save('test.pse')
-	pymol.cmd.save('prototree.pdb', 'combo')
+	    #copy 5 times but alternate the direction and rotate outwards by 20&deg;
+	    for i in range(5):
+	        pymol.cmd.create(f'leaf{i}', 'leaf')
+	        if i % 2 == 1:
+		    # N/C terminal flip
+		    pymol.cmd.rotate('z', 180, f'leaf{i}', origin=ori, camera=0)
+		    x, y, z = pymol.cmd.get_coords(f'/leaf{i}//A/16/C')[0]
+		    pymol.cmd.translate([-x + 15, -y, z], f'leaf{i}', camera=0)
+	        pymol.cmd.rotate('z', 20 * math.sin(i * 2 * math.pi/5), f'leaf{i}', origin=ori)
+	        pymol.cmd.rotate('y', 20 * math.cos(i * 2 * math.pi/5), f'leaf{i}', origin=ori)
+	        pymol.cmd.alter(f'leaf{i}', f'resi=str(int(resi)+{i*16})')
+	    pymol.cmd.sort()
+	    pymol.cmd.delete('leaf')
+	    pymol.cmd.create('combo',' or '.join([f'leaf{i}' for i in range(5)]))
+	    pymol.cmd.save('test.pse')
+	    pymol.cmd.save('prototree.pdb', 'combo')
 
 
 ## Loop remodelling
